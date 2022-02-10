@@ -8,9 +8,19 @@ public class Inventory {
 
     File inputFile;
     Map<String, Item> itemList = new TreeMap<>();
-    public Inventory (inputFile)
+    public Inventory (File inputFile)
     {
         this.inputFile = inputFile;
+        loadInitialItemsFile();
+
 
     }
+
+    private String loadInitialItemsFile()
+    {
+        InitialItemsFile initialItemsFile = new InitialItemsFile(inputFile, this);
+
+    }
+
+
 }
