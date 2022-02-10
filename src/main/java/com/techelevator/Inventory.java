@@ -32,6 +32,7 @@ public class Inventory {
         // if stocked is false; return message to user interface that item not in stock
         // send message to the audit trail
         // handle money
+        return isStocked;
     }
 
 }
