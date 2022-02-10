@@ -9,9 +9,9 @@ public class Item {
     private String[] itemArray;
     private String slotLocation;
     private String productName;
-    private BigDecimal price;
     private String type;
     private int count;
+    private BigDecimal price;
     private String priceString;
 
     public Item(String[] itemArray)
@@ -39,6 +39,29 @@ public class Item {
             count--;
         }
         return isStocked;
+    }
+
+    public boolean isInInventory() {
+        boolean isStocked = false;
+        if (count > 0) {
+            isStocked = true;
+        } return isStocked;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public int getCount() {
+        return count;
     }
 
 }

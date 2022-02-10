@@ -16,9 +16,13 @@ public class Money {
         availableFunds.add(newFunds) ;
 
     }
-    public void purchaseItem()
-    {
+    public boolean purchaseItem(BigDecimal price) {
+        boolean isSufficientFunds = false;
+        int compareFundsToPrice = availableFunds.compareTo(price);
 
-
+        if (compareFundsToPrice >= 0) {
+            availableFunds.subtract(price);
+            isSufficientFunds = true;
+        } return isSufficientFunds;
     }
 }
