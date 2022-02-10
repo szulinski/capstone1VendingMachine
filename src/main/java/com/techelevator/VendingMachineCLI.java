@@ -15,20 +15,21 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
-		while (true) {
-			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-
-			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// display vending machine items
-			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
-			}
-		}
+//		while (true) {
+//			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+//
+//			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
+//				// display vending machine items
+//			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+//				// do purchase
+//			}
+		//}
 	}
-
 	public static void main(String[] args) {
-		VendingMachineUI menu = new VendingMachineUI(System.in, System.out);
-		VendingMachineCLI cli = new VendingMachineCLI(menu);
-		cli.run();
+
+		VendingMachine vendingMachine = new VendingMachine();
+//		VendingMachineUI menu = new VendingMachineUI(System.in, System.out);
+//		VendingMachineCLI cli = new VendingMachineCLI(menu);
+//		cli.run();
 	}
 }

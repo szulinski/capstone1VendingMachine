@@ -4,16 +4,26 @@ import java.io.File;
 
 public class VendingMachine {
 
-    private String inputFile;
+    private String inputFileString = "vendingmachine.csv";
     private Inventory inventory;
 
-    public VendingMachine(File inputFile)
+    //public VendingMachine(File inputFile)
+    public VendingMachine()
     {
-        this.inputFile = loadInventroy();
+        //this.inputFileString = ;
+        loadInventory();
     }
-    private loadInventory()
+    private void loadInventory()
     {
+        File inputFile = new File(inputFileString);
         Inventory inventory = new Inventory(inputFile);
+
+        System.out.println ("Inventory successfully loaded.");
+    }
+
+    public void purchaseItem(String slotLocation)
+    {
+        boolean isStocked = inventory.removeFromInventory();
     }
 
 }
