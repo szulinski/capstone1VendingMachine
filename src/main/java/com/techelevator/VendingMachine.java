@@ -21,9 +21,10 @@ public class VendingMachine {
         System.out.println ("Inventory successfully loaded.");
     }
 
-    public void purchaseItem(String slotLocation)
+    public boolean purchaseItem(String slotLocation)
     {
-        boolean isStocked = inventory.removeFromInventory();
+        boolean isStocked = inventory.removeFromInventory(slotLocation);
+        return isStocked;
     }
 
 }
