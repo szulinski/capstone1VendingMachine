@@ -19,31 +19,39 @@ public class VendingMachine {
 
     private void loadInventory()
     {
-        File inputFile = new File(inputFileString);
-        Inventory inventory = new Inventory(inputFile);
+//        Won't accept 404 catch
+            File inputFile = new File(inputFileString);
+            Inventory inventory = new Inventory(inputFile);
 
-        System.out.println ("Inventory successfully loaded.");
-    }
+            System.out.println("Inventory successfully loaded.");
+        }
 
-    public boolean purchaseItem(String slotLocation)
-    {
+//        Same deal as Money - Line 30.
+    public boolean purchaseItem(String slotLocation) {
         boolean isStocked = inventory.isInInventory(slotLocation);
         BigDecimal price = inventory.getPrice(slotLocation);
         boolean isSufficientFunds = money.purchaseItem(price);
 
-        if (isStocked && isSufficientFunds) {
-            money.purchaseItem(price);
-            inventory.removeFromInventory(slotLocation);
+        try {
+            if (isStocked && isSufficientFunds) {
+                money.purchaseItem(price);
+                inventory.removeFromInventory(slotLocation);
 //            more UI interaction
 //            remember to ding audit class with transaction and inventory update
-        }
-
+            }
 //        Probably going to return message callsigns to the UI
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
         return isStocked;
     }
 
-    public void addFunds(BigDecimal funds)
+        public void addFunds(BigDecimal funds)
     {
-        money.addFunds(funds);
+        try {
+            money.addFunds(funds);
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
     }
 }

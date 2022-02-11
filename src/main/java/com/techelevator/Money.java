@@ -13,23 +13,34 @@ public class Money {
 
     public void addFunds(BigDecimal newFunds)
     {
-        // Compare to make sure the added funds are greater than 0
-        BigDecimal zero = new BigDecimal(0.0);
+        try {
+            // Compare to make sure the added funds are greater than 0
+            BigDecimal zero = new BigDecimal(0.0);
 
-        int fundsToZero = newFunds.compareTo(zero);
+            int fundsToZero = newFunds.compareTo(zero);
 
-        if (fundsToZero > 0) {
-            availableFunds = availableFunds.add(newFunds);
+            if (fundsToZero > 0) {
+                availableFunds = availableFunds.add(newFunds);
+            }
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
         }
 
     }
+//    Unsure this is stable. It's going to return isSufficientFunds with this set up and nothing is angry, BUT
+//    Is it only ever going to return false now? Im unsure how "sticky" information in the trycatch is.
+//    I would assume it works as intended, but I'm not 100%
     public boolean purchaseItem(BigDecimal price) {
         boolean isSufficientFunds = false;
-        int compareFundsToPrice = availableFunds.compareTo(price);
+        try {
+            int compareFundsToPrice = availableFunds.compareTo(price);
 
-        if (compareFundsToPrice >= 0) {
-            availableFunds = availableFunds.subtract(price);
-            isSufficientFunds = true;
+            if (compareFundsToPrice >= 0) {
+                availableFunds = availableFunds.subtract(price);
+                isSufficientFunds = true;
+            }
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
         }
         return isSufficientFunds;
     }
