@@ -13,7 +13,6 @@ public class Money {
 
     public void addFunds(BigDecimal newFunds)
     {
-        try {
             // Compare to make sure the added funds are greater than 0
             BigDecimal zero = new BigDecimal(0.0);
 
@@ -22,9 +21,6 @@ public class Money {
             if (fundsToZero > 0) {
                 availableFunds = availableFunds.add(newFunds);
             }
-        } catch (ArithmeticException e) {
-            e.printStackTrace();
-        }
 
     }
 //    Unsure this is stable. It's going to return isSufficientFunds with this set up and nothing is angry, BUT
@@ -32,16 +28,14 @@ public class Money {
 //    I would assume it works as intended, but I'm not 100%
     public boolean purchaseItem(BigDecimal price) {
         boolean isSufficientFunds = false;
-        try {
+
             int compareFundsToPrice = availableFunds.compareTo(price);
 
             if (compareFundsToPrice >= 0) {
                 availableFunds = availableFunds.subtract(price);
                 isSufficientFunds = true;
             }
-        } catch (ArithmeticException e) {
-            e.printStackTrace();
-        }
+
         return isSufficientFunds;
     }
 
