@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Money {
 
@@ -8,7 +9,7 @@ public class Money {
 
     public Money()
     {
-        availableFunds = new BigDecimal(10.00);
+        availableFunds = new BigDecimal("1.15");
     }
 
     public void addFunds(BigDecimal newFunds)
@@ -42,6 +43,24 @@ public class Money {
     public BigDecimal getAvailableFunds()
     {
         return availableFunds;
+    }
+
+    public void cashOut() {
+        BigDecimal quarters = new BigDecimal(".25");
+        BigDecimal dimes = new BigDecimal(".10");
+        BigDecimal nickels = new BigDecimal(".05");
+
+        BigDecimal noQuarters = availableFunds.divide(quarters, RoundingMode.HALF_DOWN);
+        BigDecimal subtractionQuarters = noQuarters.multiply(quarters);
+        availableFunds = availableFunds.subtract(subtractionQuarters);
+
+        BigDecimal noDimes = availableFunds.divide(dimes, RoundingMode.HALF_DOWN);
+        BigDecimal subtractionDimes = noDimes.multiply(dimes);
+        availableFunds = availableFunds.subtract(subtractionDimes);
+
+        BigDecimal noNickels = availableFunds.divide(nickels, RoundingMode.HALF_DOWN);
+        BigDecimal subtractionNickels = noNickels.multiply(nickels);
+        availableFunds = availableFunds.subtract(subtractionNickels);
     }
 
 }
