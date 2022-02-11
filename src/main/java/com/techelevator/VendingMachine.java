@@ -2,7 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+
 
 public class VendingMachine {
 
@@ -20,7 +20,7 @@ public class VendingMachine {
 
         audit = new Audit();
         BigDecimal addFunds = new BigDecimal(1.50);
-        addFunds.setScale(2);
+        addFunds = addFunds.setScale(2);
         addFunds(addFunds);
         cashOut();
         closeApplication();
@@ -46,7 +46,7 @@ public class VendingMachine {
     {
 //        Won't accept 404 catch
             File inputFile = new File(inputFileString);
-            Inventory inventory = new Inventory(inputFile);
+            inventory = new Inventory(inputFile);
 
             System.out.println("Inventory successfully loaded.");
         }
@@ -74,7 +74,7 @@ public class VendingMachine {
     public void addFunds(BigDecimal funds)
     {
         try {
-            funds.setScale(2);
+            funds = funds.setScale(2);
             String startingBalanceString = "$" + funds.toString() + " ";
            //BigDecimal startingBalance = money.getAvailableFunds();
             //String startingBalanceString = "$" + startingBalance.toString() + " ";
