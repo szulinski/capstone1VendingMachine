@@ -16,6 +16,7 @@ public class VendingMachine {
         loadInventory();
         money = new Money();
     }
+
     private void loadInventory()
     {
         File inputFile = new File(inputFileString);
@@ -41,4 +42,8 @@ public class VendingMachine {
         return isStocked;
     }
 
+    public void addFunds(BigDecimal funds)
+    {
+        money.addFunds(funds);
+    }
 }
