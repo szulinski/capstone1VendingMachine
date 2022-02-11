@@ -39,7 +39,8 @@ public class Money {
 
     public BigDecimal getAvailableFunds()
     {
-        return availableFunds.setScale(2);
+        availableFunds = availableFunds.setScale(2);
+        return availableFunds;
     }
 
     public BigDecimal[] cashOut() {
