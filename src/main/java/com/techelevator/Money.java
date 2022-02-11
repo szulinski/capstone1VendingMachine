@@ -9,7 +9,7 @@ public class Money {
 
     public Money()
     {
-        availableFunds = new BigDecimal("1.15");
+        availableFunds = new BigDecimal("10.00");
     }
 
     public void addFunds(BigDecimal newFunds)
@@ -24,9 +24,6 @@ public class Money {
             }
 
     }
-//    Unsure this is stable. It's going to return isSufficientFunds with this set up and nothing is angry, BUT
-//    Is it only ever going to return false now? Im unsure how "sticky" information in the trycatch is.
-//    I would assume it works as intended, but I'm not 100%
     public boolean purchaseItem(BigDecimal price) {
         boolean isSufficientFunds = false;
 
@@ -45,22 +42,32 @@ public class Money {
         return availableFunds;
     }
 
-    public void cashOut() {
+    public BigDecimal[] cashOut() {
         BigDecimal quarters = new BigDecimal(".25");
         BigDecimal dimes = new BigDecimal(".10");
         BigDecimal nickels = new BigDecimal(".05");
 
-        BigDecimal noQuarters = availableFunds.divide(quarters, RoundingMode.HALF_DOWN);
-        BigDecimal subtractionQuarters = noQuarters.multiply(quarters);
+        BigDecimal noQuarters = availableFunds.divide(quarters, RoundingMode.DOWN);
+        BigDecimal quartersRounded = noQuarters.setScale(0,RoundingMode.DOWN);
+        BigDecimal subtractionQuarters = quartersRounded.multiply(quarters);
         availableFunds = availableFunds.subtract(subtractionQuarters);
 
         BigDecimal noDimes = availableFunds.divide(dimes, RoundingMode.HALF_DOWN);
-        BigDecimal subtractionDimes = noDimes.multiply(dimes);
+        BigDecimal dimesRounded = noDimes.setScale(0,RoundingMode.DOWN);
+        BigDecimal subtractionDimes = dimesRounded.multiply(dimes);
         availableFunds = availableFunds.subtract(subtractionDimes);
 
         BigDecimal noNickels = availableFunds.divide(nickels, RoundingMode.HALF_DOWN);
+        BigDecimal nickelsRounded = noNickels.setScale(0,RoundingMode.DOWN);
         BigDecimal subtractionNickels = noNickels.multiply(nickels);
         availableFunds = availableFunds.subtract(subtractionNickels);
+
+        BigDecimal[] change = new BigDecimal[3];
+        change[0] = quartersRounded;
+        change[1] = dimesRounded;
+        change[2] = nickelsRounded;
+        return change;
+
     }
 
 }

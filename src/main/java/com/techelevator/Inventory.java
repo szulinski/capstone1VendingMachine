@@ -35,7 +35,6 @@ public class Inventory {
         return item.isInInventory();
     }
 
-//    Demonstration TryCatch. Line 56 now has a "missing return issue." Put it outside trycatch, isStocked is red.
     public boolean removeFromInventory(String slotLocation)
     {
 
