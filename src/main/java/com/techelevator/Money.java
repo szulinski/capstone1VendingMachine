@@ -13,7 +13,14 @@ public class Money {
 
     public void addFunds(BigDecimal newFunds)
     {
-        availableFunds.add(newFunds) ;
+        // Compare to make sure the added funds are greater than 0
+        BigDecimal zero = new BigDecimal(0.0);
+
+        int fundsToZero = newFunds.compareTo(zero);
+
+        if (fundsToZero > 0) {
+            availableFunds = availableFunds.add(newFunds);
+        }
 
     }
     public boolean purchaseItem(BigDecimal price) {
@@ -21,8 +28,15 @@ public class Money {
         int compareFundsToPrice = availableFunds.compareTo(price);
 
         if (compareFundsToPrice >= 0) {
-            availableFunds.subtract(price);
+            availableFunds = availableFunds.subtract(price);
             isSufficientFunds = true;
-        } return isSufficientFunds;
+        }
+        return isSufficientFunds;
     }
+
+    public BigDecimal getAvailableFunds()
+    {
+        return availableFunds;
+    }
+
 }
