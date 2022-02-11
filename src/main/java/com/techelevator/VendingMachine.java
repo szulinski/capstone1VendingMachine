@@ -15,6 +15,7 @@ public class VendingMachine {
         //this.inputFileString = ;
         loadInventory();
         money = new Money();
+        money.cashOut();
     }
 
     private void loadInventory()
