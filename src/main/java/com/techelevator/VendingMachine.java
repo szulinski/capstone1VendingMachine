@@ -41,7 +41,7 @@ public class VendingMachine {
             }
 //        Probably going to return message callsigns to the UI
         } catch (ArithmeticException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return isStocked;
     }
