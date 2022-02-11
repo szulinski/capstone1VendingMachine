@@ -19,9 +19,10 @@ public class VendingMachine {
         money = new Money();
 
         audit = new Audit();
-        BigDecimal addFunds = new BigDecimal(1.50);
+        BigDecimal addFunds = new BigDecimal("1.00");
         addFunds = addFunds.setScale(2);
         addFunds(addFunds);
+        purchaseItem("A1");
         cashOut();
         closeApplication();
         //audit.createAuditEntry("Purchase Made");
@@ -51,33 +52,39 @@ public class VendingMachine {
             System.out.println("Inventory successfully loaded.");
         }
 
-//        Same deal as Money - Line 30.
+
     public boolean purchaseItem(String slotLocation) {
         boolean isStocked = inventory.isInInventory(slotLocation);
         BigDecimal price = inventory.getPrice(slotLocation);
+        BigDecimal initialBalance = money.getAvailableFunds();
+        String initialBalanceString = initialBalance.toString();
         boolean isSufficientFunds = money.purchaseItem(price);
 
-        try {
             if (isStocked && isSufficientFunds) {
-                money.purchaseItem(price);
+
+//                money.purchaseItem(price);
                 inventory.removeFromInventory(slotLocation);
+
+                String productName = inventory.getProductName(slotLocation);
+                String productInfo = productName + " " + slotLocation;
+                BigDecimal availableBalance = money.getAvailableFunds();
+                String availableBalanceString = availableBalance.toString();
+                String moneyString = "$" + initialBalanceString + " $" + availableBalanceString;
+                String auditMessage = productInfo + " " + moneyString;
+                audit.createAuditEntry(auditMessage);
+
 //            more UI interaction
 //            remember to ding audit class with transaction and inventory update
             }
 //        Probably going to return message callsigns to the UI
-        } catch (ArithmeticException e) {
-            System.out.println(e.getMessage());
-        }
         return isStocked;
     }
 
     public void addFunds(BigDecimal funds)
     {
         try {
-            funds = funds.setScale(2);
-            String startingBalanceString = "$" + funds.toString() + " ";
-           //BigDecimal startingBalance = money.getAvailableFunds();
-            //String startingBalanceString = "$" + startingBalance.toString() + " ";
+           BigDecimal startingBalance = money.getAvailableFunds();
+            String startingBalanceString = "$" + startingBalance.toString() + " ";
 
             money.addFunds(funds);
 

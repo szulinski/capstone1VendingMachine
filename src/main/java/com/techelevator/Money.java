@@ -14,7 +14,6 @@ public class Money {
 
     public void addFunds(BigDecimal newFunds)
     {
-            // Compare to make sure the added funds are greater than 0
             BigDecimal zero = new BigDecimal(0.0);
 
             int fundsToZero = newFunds.compareTo(zero);
@@ -44,30 +43,38 @@ public class Money {
     }
 
     public BigDecimal[] cashOut() {
-        BigDecimal quarters = new BigDecimal(".25");
-        BigDecimal dimes = new BigDecimal(".10");
-        BigDecimal nickels = new BigDecimal(".05");
-
-        BigDecimal noQuarters = availableFunds.divide(quarters, RoundingMode.DOWN);
-        BigDecimal quartersRounded = noQuarters.setScale(0,RoundingMode.DOWN);
-        BigDecimal subtractionQuarters = quartersRounded.multiply(quarters);
-        availableFunds = availableFunds.subtract(subtractionQuarters);
-
-        BigDecimal noDimes = availableFunds.divide(dimes, RoundingMode.HALF_DOWN);
-        BigDecimal dimesRounded = noDimes.setScale(0,RoundingMode.DOWN);
-        BigDecimal subtractionDimes = dimesRounded.multiply(dimes);
-        availableFunds = availableFunds.subtract(subtractionDimes);
-
-        BigDecimal noNickels = availableFunds.divide(nickels, RoundingMode.HALF_DOWN);
-        BigDecimal nickelsRounded = noNickels.setScale(0,RoundingMode.DOWN);
-        BigDecimal subtractionNickels = noNickels.multiply(nickels);
-        availableFunds = availableFunds.subtract(subtractionNickels);
-
         BigDecimal[] change = new BigDecimal[3];
-        change[0] = quartersRounded;
-        change[1] = dimesRounded;
-        change[2] = nickelsRounded;
-        return change;
+        change[0] = new BigDecimal ("0.00");
+        change[1] = new BigDecimal("0.00");
+        change[2] = new BigDecimal("0.00");
+
+        try {
+            BigDecimal quarters = new BigDecimal(".25");
+            BigDecimal dimes = new BigDecimal(".10");
+            BigDecimal nickels = new BigDecimal(".05");
+
+            BigDecimal noQuarters = availableFunds.divide(quarters, RoundingMode.DOWN);
+            BigDecimal quartersRounded = noQuarters.setScale(0, RoundingMode.DOWN);
+            BigDecimal subtractionQuarters = quartersRounded.multiply(quarters);
+            availableFunds = availableFunds.subtract(subtractionQuarters);
+
+            BigDecimal noDimes = availableFunds.divide(dimes, RoundingMode.DOWN);
+            BigDecimal dimesRounded = noDimes.setScale(0, RoundingMode.DOWN);
+            BigDecimal subtractionDimes = dimesRounded.multiply(dimes);
+            availableFunds = availableFunds.subtract(subtractionDimes);
+
+            BigDecimal noNickels = availableFunds.divide(nickels, RoundingMode.DOWN);
+            BigDecimal nickelsRounded = noNickels.setScale(0, RoundingMode.DOWN);
+            BigDecimal subtractionNickels = noNickels.multiply(nickels);
+            availableFunds = availableFunds.subtract(subtractionNickels);
+
+            change[0] = quartersRounded;
+            change[1] = dimesRounded;
+            change[2] = nickelsRounded;
+            return change;
+        } catch (ArithmeticException e) {
+            return change;
+        }
 
     }
 
