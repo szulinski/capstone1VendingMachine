@@ -35,6 +35,8 @@ public class VendingMachineCLI {
 
 	private static String[] activeMenu = MAIN_MENU_OPTIONS;
 
+	private boolean isProductList = false;
+
 	public VendingMachineCLI(VendingMachineUI menu) {
 		this.menu = menu;
 	}
@@ -69,15 +71,27 @@ public class VendingMachineCLI {
 
 					activeMenu = SELECT_PRODUCT_MENU;
 					displayProducts();
+					isProductList = true;
+
 
 
 				}
-				else if (activeMenu == SELECT_PRODUCT_MENU)
+				else if (isProductList)
 				{
-					System.out.println("Product Selected "+ choice);
-
 					String slotLocation =  choice.substring(0, 2);
 					activeMenu = PURCHASE_MENU_OPTIONS;
+
+					String[] success = vendingMachine.purchaseItem(slotLocation);
+					int successLength = success.length;
+
+					System.out.println();
+
+					for (int i = 0; i < successLength; i++)
+					{
+						System.out.println(success [i]);
+					}
+
+					isProductList = false;
 				}
 				else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 					activeMenu = MAIN_MENU_OPTIONS;
