@@ -2,6 +2,8 @@ package com.techelevator;
 
 import com.techelevator.view.VendingMachineUI;
 
+import java.math.BigDecimal;
+
 public class VendingMachineCLI {
 
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
@@ -12,13 +14,24 @@ public class VendingMachineCLI {
 	private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
 	private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Select Product";
 	private static final String PURCHASE_MENU_OPTION_FINISH_TRANSACTION = "Finish Transaction";
-	private static final String[] PURCHASE_MENU_OPTIONS= { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
+	private static final String[] PURCHASE_MENU_OPTIONS= { PURCHASE_MENU_OPTION_FEED_MONEY,
+			PURCHASE_MENU_OPTION_SELECT_PRODUCT,
+			PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
+
+	private static final String FEED_MONEY_OPTION_1= "$1";
+	private static final String FEED_MONEY_OPTION_5 = "$5";
+	private static final String FEED_MONEY_OPTION_10 = "$10";
+	private static final String FEED_MONEY_OPTION_20 = "$20";
+
+	private static final String[] FEED_MONEY_OPTION_MENU= { FEED_MONEY_OPTION_1,
+			FEED_MONEY_OPTION_5,
+			FEED_MONEY_OPTION_10,
+			FEED_MONEY_OPTION_20};
 
 	private VendingMachineUI menu;
 	private static VendingMachine vendingMachine;
 
-	private static String[] menuOptions = MAIN_MENU_OPTIONS;
-
+	private static String[] activeMenu = MAIN_MENU_OPTIONS;
 
 	public VendingMachineCLI(VendingMachineUI menu) {
 		this.menu = menu;
@@ -26,9 +39,11 @@ public class VendingMachineCLI {
 
 	public void run() {
 		boolean exit = false;
+
+
 		try {
 			while (!exit) {
-				String choice = (String) menu.getChoiceFromOptions(menuOptions);
+				String choice = (String) menu.getChoiceFromOptions(activeMenu);
 
 				if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 					String[] menuChoices = vendingMachine.createInventoryArray();
@@ -39,26 +54,52 @@ public class VendingMachineCLI {
 					}
 
 				} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-					menuOptions = PURCHASE_MENU_OPTIONS;
-					System.out.println("Your current balance");
-				}
-				else if (choice.equals(MAIN_MENU_OPTION_EXIT))
-				{
+					activeMenu = PURCHASE_MENU_OPTIONS;
+					String availableFundsString = vendingMachine.getAvailableFunds();
+					System.out.println(availableFundsString);
+				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					exit = true;
-				}
-				else if (choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY))
-				{
 
-				}
-				else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT))
-				{
+					vendingMachine.closeApplication();
+				} else if (choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+					activeMenu = FEED_MONEY_OPTION_MENU;
 
+
+				} else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+
+				} else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+					activeMenu = MAIN_MENU_OPTIONS;
 				}
-				else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION))
-				{
-					menuOptions = MAIN_MENU_OPTIONS;
+
+				else if (choice.equals(FEED_MONEY_OPTION_1)) {
+					activeMenu = PURCHASE_MENU_OPTIONS;
+					BigDecimal addedFunds = new BigDecimal("1.00");
+					vendingMachine.addFunds(addedFunds);
+					String availableFundsString = vendingMachine.getAvailableFunds();
+					System.out.println(availableFundsString);
+
+				} else if (choice.equals(FEED_MONEY_OPTION_5)) {
+					activeMenu = PURCHASE_MENU_OPTIONS;
+					BigDecimal addedFunds = new BigDecimal("5.00");
+					vendingMachine.addFunds(addedFunds);
+					String availableFundsString = vendingMachine.getAvailableFunds();
+					System.out.println(availableFundsString);
+				} else if (choice.equals(FEED_MONEY_OPTION_10)) {
+					activeMenu = PURCHASE_MENU_OPTIONS;
+					BigDecimal addedFunds = new BigDecimal("10.00");
+					vendingMachine.addFunds(addedFunds);
+					String availableFundsString = vendingMachine.getAvailableFunds();
+					System.out.println(availableFundsString);
+				} else if (choice.equals(FEED_MONEY_OPTION_20)) {
+					activeMenu = PURCHASE_MENU_OPTIONS;
+					BigDecimal addedFunds = new BigDecimal("20.00");
+					vendingMachine.addFunds(addedFunds);
+					String availableFundsString = vendingMachine.getAvailableFunds();
+					System.out.println(availableFundsString);
 				}
+
 			}
+
 		}
 		catch (Exception e)
 		{
@@ -72,5 +113,15 @@ public class VendingMachineCLI {
 		VendingMachineUI menu = new VendingMachineUI(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
+	}
+
+	private String[] addFundsString()
+	{
+		String[] addFundsMenu = new String[4];
+		addFundsMenu[0] = "$1";
+		addFundsMenu[1] = "$5";
+		addFundsMenu[2] = "$10";
+		addFundsMenu[3] = "$20";
+		return addFundsMenu;
 	}
 }
