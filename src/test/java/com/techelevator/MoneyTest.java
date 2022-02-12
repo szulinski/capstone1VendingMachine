@@ -14,7 +14,7 @@ public class MoneyTest {
         Money money = new Money();
 
         // Change expected funds to zero
-        BigDecimal expectedFunds = new BigDecimal (0.00);
+        BigDecimal expectedFunds = new BigDecimal (10.00);
 
         // Act
         BigDecimal availableFunds = money.getAvailableFunds();
@@ -124,12 +124,15 @@ public class MoneyTest {
     public void cash_out_normal_data_test()
     {
         // Arrange
+        Money money = new Money();
+        BigDecimal expectedFunds = new BigDecimal(0.00);
 
         // Act
-
+        money.cashOut();
+        BigDecimal availableFunds = money.getAvailableFunds();
 
         // Assert
-
+        Assert.assertEquals(expectedFunds, availableFunds);
 
     }
 
