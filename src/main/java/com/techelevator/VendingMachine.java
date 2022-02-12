@@ -17,14 +17,13 @@ public class VendingMachine {
         //this.inputFileString = ;
         loadInventory();
         money = new Money();
-
         audit = new Audit();
         BigDecimal addFunds = new BigDecimal("1.00");
         addFunds = addFunds.setScale(2);
         addFunds(addFunds);
         purchaseItem("A1");
-        cashOut();
-        closeApplication();
+        inventory.createInventoryArray();
+
         //audit.createAuditEntry("Purchase Made");
     }
 
@@ -50,6 +49,12 @@ public class VendingMachine {
             inventory = new Inventory(inputFile);
 
             System.out.println("Inventory successfully loaded.");
+        }
+
+        public String[] createInventoryArray()
+        {
+            String[] inventoryChoices = inventory.createInventoryArray();
+            return inventoryChoices;
         }
 
 
@@ -104,6 +109,14 @@ public class VendingMachine {
 
     private void closeApplication()
     {
+        BigDecimal[] change = money.cashOut();
+        String quartersString = change[0].toString() + " Quarters ";
+        String dimesString = change[1].toString() + "Dimes ";
+        String nickelsString = change[2].toString() + "Nickels";
+        String changeString = quartersString + dimesString + nickelsString;
+
+        System.out.println (changeString);
+
         audit.closeAudit();
     }
 }
