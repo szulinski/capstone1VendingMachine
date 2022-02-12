@@ -55,14 +55,20 @@ public class VendingMachineCLI {
 				if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 					displayProducts();
 
-				} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+				}
+				else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 					activeMenu = PURCHASE_MENU_OPTIONS;
 					String availableFundsString = vendingMachine.getAvailableFunds();
 					System.out.println(availableFundsString);
-				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+				}
+				else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					exit = true;
 
-					vendingMachine.closeApplication();
+					String changeString = vendingMachine.closeApplication();
+					if (changeString.length() > 0)
+					{
+						System.out.println (changeString);
+					}
 				} else if (choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 					activeMenu = FEED_MONEY_OPTION_MENU;
 
@@ -72,8 +78,6 @@ public class VendingMachineCLI {
 					activeMenu = SELECT_PRODUCT_MENU;
 					displayProducts();
 					isProductList = true;
-
-
 
 				}
 				else if (isProductList)
@@ -94,6 +98,8 @@ public class VendingMachineCLI {
 					isProductList = false;
 				}
 				else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+					String changeString = vendingMachine.cashOut();
+					System.out.println(changeString);
 					activeMenu = MAIN_MENU_OPTIONS;
 				} else if (choice.equals(FEED_MONEY_OPTION_1)) {
 					activeMenu = PURCHASE_MENU_OPTIONS;
@@ -125,7 +131,7 @@ public class VendingMachineCLI {
 			}
 
 		} catch (Exception e) {
-			System.out.println("An exception occured.");
+			System.out.println("An exception occured in the menu.");
 
 		}
 	}
