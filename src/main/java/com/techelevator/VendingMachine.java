@@ -34,11 +34,11 @@ public class VendingMachine {
 
         BigDecimal[] change = money.cashOut();
         String quartersString = change[0].toString() + " Quarters ";
-        String dimesString = change[1].toString() + "Dimes ";
-        String nickelsString = change[2].toString() + "Nickels";
+        String dimesString = change[1].toString() + " Dimes ";
+        String nickelsString = change[2].toString() + " Nickels";
         String changeString = quartersString + dimesString + nickelsString;
 
-        System.out.println (changeString);
+        //System.out.println (changeString);
 
         BigDecimal endingBalance = money.getAvailableFunds();
         String endingBalanceString = "$" + endingBalance.toString() + " ";
@@ -52,7 +52,7 @@ public class VendingMachine {
 
     private void loadInventory()
     {
-//        Won't accept 404 catch
+
         File inputFile = new File(inputFileString);
         inventory = new Inventory(inputFile);
 
@@ -141,9 +141,20 @@ public class VendingMachine {
         }
     }
 
-    public void closeApplication()
+    public String closeApplication()
     {
+        String changeString = "";
+
+        BigDecimal availableFunds = money.getAvailableFunds();
+        BigDecimal zeroBalance = new BigDecimal(0);
+
+
+        if (availableFunds.compareTo(zeroBalance) > 0)
+        {
+            changeString = cashOut();
+        }
         audit.closeAudit();
+        return changeString;
     }
 
     public String getAvailableFunds()
