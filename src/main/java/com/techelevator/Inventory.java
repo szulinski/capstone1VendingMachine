@@ -35,7 +35,12 @@ public class Inventory {
             BigDecimal priceValue = item.getPrice();
             String price = "$" + priceValue.toString() + " ";
             int count = item.getCount();
-            String countString = "Items left: " + count;
+            String countString = "";
+            if (count == 0)
+                countString = "Sold out";
+            else {
+                countString = "Items left: " + count;
+            }
             menuList [i] = slotLocation + productName + price + countString;
             i++;
 
