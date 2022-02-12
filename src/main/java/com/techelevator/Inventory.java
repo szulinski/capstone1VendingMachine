@@ -3,18 +3,47 @@ package com.techelevator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Inventory {
 
-    File inputFile;
-    Map<String, Item> itemList = new TreeMap<>();
+    private File inputFile;
+    private Map<String, Item> itemList = new TreeMap<>();
+    //private String[] menuList;
+
     public Inventory (File inputFile)
     {
         this.inputFile = inputFile;
         loadInitialItemsFile();
     }
+
+    public String[] createInventoryArray()
+    {
+        int inventorySize = itemList.size();
+        String[] menuList = new String[inventorySize];
+
+        int i = 0;
+
+        for (Map.Entry<String, Item> itemEntry : itemList.entrySet()) {
+            String slotLocationKey = itemEntry.getKey() ;
+            Item item = itemEntry.getValue();
+            String slotLocation = item.getSlotLocation() + " ";
+            String productName = item.getProductName() + " ";
+            BigDecimal priceValue = item.getPrice();
+            String price = "$" + priceValue.toString();
+            menuList [i] = slotLocation + productName + price;
+            i++;
+
+        }
+
+
+        return menuList;
+
+    }
+
 
 
 
