@@ -66,16 +66,39 @@ public class VendingMachine {
     }
 
 
-    public boolean purchaseItem(String slotLocation) {
+    public String[] purchaseItem(String slotLocation) {
+
+        String[] infoString = new String[5];
         boolean isStocked = inventory.isInInventory(slotLocation);
+
+        if (isStocked)
+        {
+            infoString[0] = "The item in slot " + slotLocation + " is in stock.";
+        }
+        else
+        {
+            infoString[0] = "The item in slot " + slotLocation + " is not in stock.";
+        }
+
         BigDecimal price = inventory.getPrice(slotLocation);
+        String priceString = price.toString();
         BigDecimal initialBalance = money.getAvailableFunds();
         String initialBalanceString = initialBalance.toString();
         boolean isSufficientFunds = money.purchaseItem(price);
 
+        infoString [1] = "The available balance is $" + initialBalanceString + " to purchase the item priced at $" +priceString +".";
+        if (isSufficientFunds)
+        {
+
+            infoString [2] = "There are sufficient funds.";
+        }
+        else
+        {
+            infoString[2] = "There are not sufficient funds.  Add more money to purchase this item.";
+        }
+
         if (isStocked && isSufficientFunds) {
 
-//                money.purchaseItem(price);
             inventory.removeFromInventory(slotLocation);
 
             String productName = inventory.getProductName(slotLocation);
@@ -85,12 +108,15 @@ public class VendingMachine {
             String moneyString = "$" + initialBalanceString + " $" + availableBalanceString;
             String auditMessage = productInfo + " " + moneyString;
             audit.createAuditEntry(auditMessage);
+            infoString [3] = "The item in slot " + slotLocation + " has been purchased.";
 
-//            more UI interaction
-//            remember to ding audit class with transaction and inventory update
         }
-//        Probably going to return message callsigns to the UI
-        return isStocked;
+        else {
+            infoString [3] = "The item in slot " + slotLocation + " has NOT been purchased.";
+
+        }
+        infoString[4] = getAvailableFunds();
+        return infoString;
     }
 
     public void addFunds(BigDecimal funds)
@@ -125,7 +151,7 @@ public class VendingMachine {
         BigDecimal availableFunds = money.getAvailableFunds();
         String availableFundsString = availableFunds.toString();
 
-        String moneyString = "Available money: $" + availableFundsString;
+        String moneyString = "The available balance is $" + availableFundsString + ".";
         return moneyString;
     }
 }
