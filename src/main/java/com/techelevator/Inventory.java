@@ -33,8 +33,10 @@ public class Inventory {
             String slotLocation = item.getSlotLocation() + " ";
             String productName = item.getProductName() + " ";
             BigDecimal priceValue = item.getPrice();
-            String price = "$" + priceValue.toString();
-            menuList [i] = slotLocation + productName + price;
+            String price = "$" + priceValue.toString() + " ";
+            int count = item.getCount();
+            String countString = "Items left: " + count;
+            menuList [i] = slotLocation + productName + price + countString;
             i++;
 
         }
