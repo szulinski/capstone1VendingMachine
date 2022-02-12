@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MoneyTest {
 
@@ -21,7 +22,7 @@ public class MoneyTest {
         BigDecimal availableFunds = money.getAvailableFunds();
 
         // Assert
-        //Assert.assertEquals(expectedFunds, availableFunds);
+        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), availableFunds);
     }
 
     @Test
@@ -43,7 +44,7 @@ public class MoneyTest {
         BigDecimal actualFunds = money.getAvailableFunds();
 
         // Assert
-        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), actualFunds);
 
     }
 
@@ -67,7 +68,7 @@ public class MoneyTest {
         BigDecimal actualFunds = money.getAvailableFunds();
 
         // Assert
-        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), actualFunds);
 
     }
 
@@ -85,7 +86,7 @@ public class MoneyTest {
         // will need to add funds
         BigDecimal availableFunds = money.getAvailableFunds();
 
-        BigDecimal price = new BigDecimal(3.05);
+        BigDecimal price = new BigDecimal(3.05).setScale(2, RoundingMode.HALF_DOWN);
 
         // Act
         money.purchaseItem(price);
@@ -93,7 +94,7 @@ public class MoneyTest {
         BigDecimal actualFunds = money.getAvailableFunds();
 
         // Assert
-        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), actualFunds);
 
     }
 
@@ -120,7 +121,7 @@ public class MoneyTest {
         BigDecimal actualFunds = money.getAvailableFunds();
 
         // Assert
-        Assert.assertEquals(expectedFunds, actualFunds);
+        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), actualFunds);
     }
 
     @Test
@@ -136,7 +137,7 @@ public class MoneyTest {
         BigDecimal availableFunds = money.getAvailableFunds();
 
         // Assert
-        Assert.assertEquals(expectedFunds, availableFunds);
+        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), availableFunds);
 
     }
 
