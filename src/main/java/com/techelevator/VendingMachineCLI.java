@@ -9,21 +9,23 @@ public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
-	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
+	private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
 
 	private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
 	private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Select Product";
 	private static final String PURCHASE_MENU_OPTION_FINISH_TRANSACTION = "Finish Transaction";
-	private static final String[] PURCHASE_MENU_OPTIONS= { PURCHASE_MENU_OPTION_FEED_MONEY,
+	private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_OPTION_FEED_MONEY,
 			PURCHASE_MENU_OPTION_SELECT_PRODUCT,
 			PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
 
-	private static final String FEED_MONEY_OPTION_1= "$1";
+	private static String[] SELECT_PRODUCT_MENU;
+
+	private static final String FEED_MONEY_OPTION_1 = "$1";
 	private static final String FEED_MONEY_OPTION_5 = "$5";
 	private static final String FEED_MONEY_OPTION_10 = "$10";
 	private static final String FEED_MONEY_OPTION_20 = "$20";
 
-	private static final String[] FEED_MONEY_OPTION_MENU= { FEED_MONEY_OPTION_1,
+	private static final String[] FEED_MONEY_OPTION_MENU = {FEED_MONEY_OPTION_1,
 			FEED_MONEY_OPTION_5,
 			FEED_MONEY_OPTION_10,
 			FEED_MONEY_OPTION_20};
@@ -38,20 +40,18 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
+
+		displayProducts();
+
 		boolean exit = false;
 
 
 		try {
 			while (!exit) {
-				String choice = (String) menu.getChoiceFromOptions(activeMenu);
+			String choice = (String) menu.getChoiceFromOptions(activeMenu);
 
 				if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-					String[] menuChoices = vendingMachine.createInventoryArray();
-					int menuChoicesLength = menuChoices.length;
-
-					for (int i = 0; i < menuChoicesLength; i++) {
-						System.out.println(menuChoices[i]);
-					}
+					displayProducts();
 
 				} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 					activeMenu = PURCHASE_MENU_OPTIONS;
@@ -67,11 +67,21 @@ public class VendingMachineCLI {
 
 				} else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 
-				} else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-					activeMenu = MAIN_MENU_OPTIONS;
-				}
+					activeMenu = SELECT_PRODUCT_MENU;
+					displayProducts();
 
-				else if (choice.equals(FEED_MONEY_OPTION_1)) {
+
+				}
+				else if (activeMenu == SELECT_PRODUCT_MENU)
+				{
+					System.out.println("Product Selected "+ choice);
+
+					String slotLocation =  choice.substring(0, 2);
+					activeMenu = PURCHASE_MENU_OPTIONS;
+				}
+				else if (choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+					activeMenu = MAIN_MENU_OPTIONS;
+				} else if (choice.equals(FEED_MONEY_OPTION_1)) {
 					activeMenu = PURCHASE_MENU_OPTIONS;
 					BigDecimal addedFunds = new BigDecimal("1.00");
 					vendingMachine.addFunds(addedFunds);
@@ -100,13 +110,12 @@ public class VendingMachineCLI {
 
 			}
 
-		}
-		catch (Exception e)
-		{
-			System.out.println ("An exception occured.");
+		} catch (Exception e) {
+			System.out.println("An exception occured.");
 
 		}
 	}
+
 	public static void main(String[] args) {
 
 		vendingMachine = new VendingMachine();
@@ -115,13 +124,17 @@ public class VendingMachineCLI {
 		cli.run();
 	}
 
-	private String[] addFundsString()
+
+	private void displayProducts()
 	{
-		String[] addFundsMenu = new String[4];
-		addFundsMenu[0] = "$1";
-		addFundsMenu[1] = "$5";
-		addFundsMenu[2] = "$10";
-		addFundsMenu[3] = "$20";
-		return addFundsMenu;
+		String[] menuChoices = vendingMachine.createInventoryArray();
+		int menuChoicesLength = menuChoices.length;
+		SELECT_PRODUCT_MENU = new String[menuChoicesLength];
+
+		for(int i = 0; i<menuChoicesLength;i++)
+		{
+			SELECT_PRODUCT_MENU[i] = menuChoices[i];
+			System.out.println(menuChoices[i]);
+		}
 	}
 }
