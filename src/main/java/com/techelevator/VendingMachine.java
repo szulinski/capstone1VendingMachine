@@ -10,6 +10,12 @@ public class VendingMachine {
     private Inventory inventory;
     private Money money;
     private Audit audit;
+    private SalesReport salesReport;
+
+
+
+
+
 
     //public VendingMachine(File inputFile)
     public VendingMachine()
@@ -67,7 +73,7 @@ public class VendingMachine {
 
     public String[] purchaseItem(String slotLocation) {
 
-        String[] infoString = new String[5];
+        String[] infoString = new String[8];
         boolean isStocked = inventory.isInInventory(slotLocation);
 
         if (isStocked)
@@ -106,15 +112,21 @@ public class VendingMachine {
             String availableBalanceString = availableBalance.toString();
             String moneyString = "$" + initialBalanceString + " $" + availableBalanceString;
             String auditMessage = productInfo + " " + moneyString;
+            String typeString = inventory.getTypeString(slotLocation2);
             audit.createAuditEntry(auditMessage);
             infoString [3] = "The item in slot " + slotLocation + " has been purchased.";
+            infoString[4] = "";
+            infoString[5] = typeString;
+
 
         }
         else {
             infoString [3] = "The item in slot " + slotLocation + " has NOT been purchased.";
 
         }
-        infoString[4] = getAvailableFunds();
+        infoString[7] = getAvailableFunds();
+
+
         return infoString;
     }
 
@@ -138,6 +150,12 @@ public class VendingMachine {
         } catch (ArithmeticException e) {
             e.printStackTrace();
         }
+    }
+    public boolean createInventorySales()
+    {
+        String writeString = inventory.createInventorySales();
+        salesReport = new SalesReport(writeString);
+        return true;
     }
 
     public String closeApplication()
