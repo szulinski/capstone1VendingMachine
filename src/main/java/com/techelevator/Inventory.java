@@ -19,6 +19,55 @@ public class Inventory {
         this.inputFile = inputFile;
         loadInitialItemsFile();
     }
+    public String createInventorySales()
+    {
+        int inventorySize = itemList.size();
+        String writeString = "\n";
+
+        BigDecimal machineTotalSales = new BigDecimal("0.00");
+        machineTotalSales = machineTotalSales.setScale(2);
+
+        int i = 0;
+
+        for (Map.Entry<String, Item> itemEntry : itemList.entrySet()) {
+
+            String slotLocationKey = itemEntry.getKey() ;
+            Item item = itemEntry.getValue();
+
+            int count = item.getCount();
+            BigDecimal countBD = new BigDecimal(count);
+
+            if ( count < 5)
+            {
+                String productName = item.getProductName() + "\\|";
+                BigDecimal priceValue = item.getPrice();
+
+                BigDecimal totalSales = priceValue.multiply (countBD);
+                totalSales = totalSales.setScale(2);
+
+                String totalSalesString = totalSales.toString() + "\n";
+
+                String line = productName + totalSalesString;
+
+                writeString += line;
+
+                machineTotalSales = machineTotalSales.add(totalSales);
+
+            }
+
+        }
+
+        writeString += "\n";
+
+        String totalSalesTitle = "TOTAL SALES \\|";
+        String totalSalesString = machineTotalSales.toString() + "\n";
+        String totalSalesLine = totalSalesTitle + totalSalesString;
+
+
+        writeString += totalSalesLine;
+
+        return writeString;
+    }
 
     public String[] createInventoryArray()
     {
@@ -45,8 +94,6 @@ public class Inventory {
             i++;
 
         }
-
-
         return menuList;
 
     }
@@ -71,12 +118,9 @@ public class Inventory {
 
     public boolean removeFromInventory(String slotLocation)
     {
-            Item item = itemList.get(slotLocation);
-            boolean isStocked = item.removeFromInventory();
-            // if stocked is false; return message to user interface that item not in stock
-            // send message to the audit trail
-            // handle money
-            return isStocked;
+        Item item = itemList.get(slotLocation);
+        boolean isStocked = item.removeFromInventory();
+        return isStocked;
     }
 
     public String getProductName(String slotLocation) {
@@ -90,7 +134,28 @@ public class Inventory {
             String type = item.getType();
             return type;
     }
-
+    public String getTypeString (String slotLocation) {
+        Item item = itemList.get(slotLocation);
+        String type = item.getType();
+        String typeString = "";
+        if (type == "Beverage")
+        {
+            typeString = "Glug Glug, Yum!";
+        }
+        else if (type == "Chip")
+        {
+            typeString = "Crunch Crunch, Yum!";
+        }
+        else if (type == "Candy")
+        {
+            typeString = "Munch Munch, Yum!";
+        }
+        else if (type == "Gum")
+        {
+            typeString = "Chew Chew, Yum!";
+        }
+        return typeString;
+    }
     public int getCount(String slotLocation) {
             Item item = itemList.get(slotLocation);
             int count = item.getCount();
@@ -105,9 +170,5 @@ public class Inventory {
     }
 
 
-//    We need to have a search method to find slot location
-//    public String getSlotLocation()
-//  {
-//    functionality to display slot locations to UI
-//    }
+
 
