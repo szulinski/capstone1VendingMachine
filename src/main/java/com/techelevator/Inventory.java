@@ -138,19 +138,19 @@ public class Inventory {
         Item item = itemList.get(slotLocation);
         String type = item.getType();
         String typeString = "";
-        if (type == "Beverage")
+        if (type.equals("Beverage"))
         {
             typeString = "Glug Glug, Yum!";
         }
-        else if (type == "Chip")
+        else if (type.equals("Chip"))
         {
             typeString = "Crunch Crunch, Yum!";
         }
-        else if (type == "Candy")
+        else if (type.equals("Candy"))
         {
             typeString = "Munch Munch, Yum!";
         }
-        else if (type == "Gum")
+        else if (type.equals( "Gum"))
         {
             typeString = "Chew Chew, Yum!";
         }
