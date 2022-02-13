@@ -22,18 +22,24 @@ public class Audit {
 
     private void createPrintWriter()
     {
+        if (FileName == null)
+        {
+            System.out.println("The file name of the print writer is null.");
+            return;
+        }
         File outputFile = new File(FileName);
         boolean isAppend = true;
         try
         {
 
             auditWriter = new PrintWriter(new FileOutputStream(outputFile, isAppend));
-            //writer.append(message);
-            // create file
-            //auditWriter = new PrintWriter(outputFile);
 
         } catch(FileNotFoundException e){
             System.out.println("File does not exist.");
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Null pointer exception for the Audit Writer ");
         }
 
     }
