@@ -9,7 +9,7 @@ public class Money {
 
     public Money()
     {
-        availableFunds = new BigDecimal("10.00");
+        availableFunds = new BigDecimal("0.00");
     }
 
     public void addFunds(BigDecimal newFunds)

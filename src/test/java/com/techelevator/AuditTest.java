@@ -35,23 +35,22 @@ public class AuditTest {
     }
 
 
-//    Update: it's because Audit() sets fileName to Log when it creates the scanner
-//    I think. Even though it's before my FileName set, it's taking priority.
+//    Note: Must hard-set filename in Audit() before test
 //
-//    @Test
-//    public void DOES_IT_PRINT_TEST() {
-//        Audit audit = new Audit();
-//        FileName = "testfile.txt";
-//        File outputFile = new File(FileName);
-//        boolean isAppend = true;
-//        try {
-//            auditWriter = new PrintWriter(new FileOutputStream(outputFile, isAppend));
-//            audit.createAuditEntry("testing testing 123 123");
-//        } catch(FileNotFoundException e){
-//            System.out.println("File does not exist.");
-//        }
-//
-//        audit.closeAudit();
-//    }
+    @Test
+    public void DOES_IT_PRINT_TEST() {
+        Audit audit = new Audit();
+        FileName = "test.txt";
+        File outputFile = new File(FileName);
+        boolean isAppend = true;
+        try {
+            auditWriter = new PrintWriter(new FileOutputStream(outputFile, isAppend));
+            audit.createAuditEntry("testing testing 123 123");
+        } catch(FileNotFoundException e){
+            System.out.println("File does not exist.");
+        }
+
+        audit.closeAudit();
+    }
 
 }

@@ -41,7 +41,7 @@ public class Inventory {
             else {
                 countString = "Items left: " + count;
             }
-            menuList [i] = slotLocation + productName + price + countString;
+            menuList [i] = (slotLocation) + String.format("%-20s", productName) + String.format("%-20s", price) + String.format("%-20s", countString);
             i++;
 
         }

@@ -18,10 +18,9 @@ public class VendingMachine {
         loadInventory();
         money = new Money();
         audit = new Audit();
-        BigDecimal addFunds = new BigDecimal("1.00");
+        BigDecimal addFunds = new BigDecimal("0.00");
         addFunds = addFunds.setScale(2);
         addFunds(addFunds);
-        purchaseItem("A1");
         inventory.createInventoryArray();
 
         //audit.createAuditEntry("Purchase Made");

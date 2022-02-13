@@ -3,6 +3,7 @@ package com.techelevator.view;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class VendingMachineUI {
@@ -43,9 +44,11 @@ public class VendingMachineUI {
 
 	private void displayMenuOptions(Object[] options) {
 		out.println();
+		DecimalFormat formatter = new DecimalFormat("00");
 		for (int i = 0; i < options.length; i++) {
 			int optionNum = i + 1;
-			out.println(optionNum + ") " + options[i]);
+			String optFormatted = formatter.format(optionNum);
+			out.println(optFormatted + ") " + options[i]);
 		}
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
