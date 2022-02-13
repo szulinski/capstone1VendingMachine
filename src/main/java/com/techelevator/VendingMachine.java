@@ -112,18 +112,23 @@ public class VendingMachine {
             String availableBalanceString = availableBalance.toString();
             String moneyString = "$" + initialBalanceString + " $" + availableBalanceString;
             String auditMessage = productInfo + " " + moneyString;
-            String typeString = inventory.getTypeString(slotLocation2);
+            String typeString = inventory.getTypeString(slotLocation);
             audit.createAuditEntry(auditMessage);
             infoString [3] = "The item in slot " + slotLocation + " has been purchased.";
             infoString[4] = "";
             infoString[5] = typeString;
-
+            infoString [6] = "";
 
         }
         else {
             infoString [3] = "The item in slot " + slotLocation + " has NOT been purchased.";
+            infoString[4] = "";
+            infoString[5] = "";
+            infoString [6] = "";
+
 
         }
+
         infoString[7] = getAvailableFunds();
 
 
