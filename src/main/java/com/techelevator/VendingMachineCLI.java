@@ -9,7 +9,10 @@ public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
-	private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
+	private static final String MAiN_MENU_OPTION_SALES_REPORT = "Sales Report";
+
+	private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT,
+			MAiN_MENU_OPTION_SALES_REPORT};
 
 	private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
 	private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Select Product";
@@ -50,11 +53,14 @@ public class VendingMachineCLI {
 
 		try {
 			while (!exit) {
-			String choice = (String) menu.getChoiceFromOptions(activeMenu);
+				String choice = (String) menu.getChoiceFromOptions(activeMenu);
 
 				if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 					displayProducts();
 
+				}
+				else if (choice.equals(MAiN_MENU_OPTION_SALES_REPORT)) {
+					vendingMachine.createInventorySales();
 				}
 				else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 					activeMenu = PURCHASE_MENU_OPTIONS;
@@ -131,7 +137,7 @@ public class VendingMachineCLI {
 			}
 
 		} catch (Exception e) {
-			System.out.println("An exception occured in the menu.");
+			System.out.println("An exception occurred in the menu.");
 
 		}
 	}
