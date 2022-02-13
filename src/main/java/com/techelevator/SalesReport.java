@@ -40,14 +40,24 @@ public class SalesReport {
 
     private void createPrintWriter()
     {
+
+        if (fileName == null)
+        {
+            System.out.println("The file name of the print writer is null.");
+            return;
+        }
         File outputFile = new File(fileName);
-        boolean isAppend = false;
+        boolean isAppend = true;
         try
         {
-            reportWriter = new PrintWriter(new FileOutputStream(outputFile));
-        } catch(FileNotFoundException e){
-            System.out.println("Error creating PrintWriter for SalesReport.");
-        }
+            reportWriter = new PrintWriter(new FileOutputStream(outputFile, isAppend));
 
+        } catch(FileNotFoundException e){
+            System.out.println("File does not exist.");
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Null pointer exception for the Sales Report. ");
+        }
     }
 }
