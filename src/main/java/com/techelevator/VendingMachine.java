@@ -35,7 +35,7 @@ public class VendingMachine {
     public String cashOut() {
 
         BigDecimal startingBalance = money.getAvailableFunds();
-        String startingBalanceString = "$" + startingBalance.toString() + " ";
+        String startingBalanceString = "\n$" + startingBalance.toString() + " ";
 
         BigDecimal[] change = money.cashOut();
         String quartersString = change[0].toString() + " Quarters ";
