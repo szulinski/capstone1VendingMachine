@@ -44,7 +44,7 @@ public class SalesReport {
         boolean isAppend = false;
         try
         {
-            reportWriter = new PrintWriter(new FileOutputStream(outputFile, isAppend));
+            reportWriter = new PrintWriter(new FileOutputStream(outputFile));
         } catch(FileNotFoundException e){
             System.out.println("Error creating PrintWriter for SalesReport.");
         }
