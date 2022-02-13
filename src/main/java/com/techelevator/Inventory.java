@@ -35,14 +35,15 @@ public class Inventory {
             Item item = itemEntry.getValue();
 
             int count = item.getCount();
+            count = 5 - count;
             BigDecimal countBD = new BigDecimal(count);
 
-            if ( count < 5)
+            if ( count > 0 )
             {
-                String productName = item.getProductName() + "\\|";
+                String productName = item.getProductName() + "|";
                 BigDecimal priceValue = item.getPrice();
 
-                BigDecimal totalSales = priceValue.multiply (countBD);
+                BigDecimal totalSales = priceValue.multiply(countBD);
                 totalSales = totalSales.setScale(2);
 
                 String totalSalesString = totalSales.toString() + "\n";
@@ -59,7 +60,7 @@ public class Inventory {
 
         writeString += "\n";
 
-        String totalSalesTitle = "TOTAL SALES \\|";
+        String totalSalesTitle = "TOTAL SALES|";
         String totalSalesString = machineTotalSales.toString() + "\n";
         String totalSalesLine = totalSalesTitle + totalSalesString;
 
