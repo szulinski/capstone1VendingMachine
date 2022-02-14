@@ -6,6 +6,10 @@ import java.math.BigDecimal;
 
 public class VendingMachineCLI {
 
+	private static final String SALES_REPORT_FILE_NAME = "SalesReport.csv";
+	private static final String INVENTORY_FILE_NAME = "vendingmachine.csv";
+	private static final String AUDIT_FILE_NAME = "AuditLog.txt";
+
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
@@ -39,7 +43,7 @@ public class VendingMachineCLI {
 	private static String[] activeMenu = MAIN_MENU_OPTIONS;
 
 	private boolean isProductList = false;
-	private boolean isSalesReport = false;
+
 
 	public VendingMachineCLI(VendingMachineUI menu) {
 		this.menu = menu;
@@ -141,11 +145,12 @@ public class VendingMachineCLI {
 			System.out.println("An exception occurred in the menu.");
 
 		}
+
 	}
 
 	public static void main(String[] args) {
 
-		vendingMachine = new VendingMachine();
+		vendingMachine = new VendingMachine(INVENTORY_FILE_NAME, AUDIT_FILE_NAME, SALES_REPORT_FILE_NAME);
 		VendingMachineUI menu = new VendingMachineUI(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
