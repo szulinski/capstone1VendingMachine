@@ -1,14 +1,8 @@
 package com.techelevator;
 
-import junit.framework.AssertionFailedError;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import com.techelevator.Inventory;
 
 import static org.junit.Assert.assertTrue;
 
@@ -25,6 +19,7 @@ public class InitialItemsFileTest {
         Inventory inventoryTest = new Inventory(InitialItemsString);
         int listLength = inventoryTest.getInventoryListLength();
 
+
         // Test
         Assert.assertEquals(expectedListLength, listLength);
 
@@ -40,27 +35,28 @@ public class InitialItemsFileTest {
         // Act
         Inventory inventoryTest = new Inventory(InitialItemsString);
         int listLength = inventoryTest.getInventoryListLength();
-
+//
         // Test
         Assert.assertEquals(expectedListLength, listLength);
     }
 
 
-   /* @Test
+    @Test
     public void initial_Items_File_Null_File_Name()
     {
         // Arrange
         String InitialItemsString  = null;
+        int expectedListLength = 4;
 
         // Act
         Inventory inventoryTest = new Inventory(InitialItemsString);
-        //int listLength = inventoryTest.getInventoryListLength();
+        int listLength = inventoryTest.getInventoryListLength();
 
 
         // Test
         Assert.assertEquals(expectedListLength, listLength);
 
-    }*/
+    }
 
 
 
