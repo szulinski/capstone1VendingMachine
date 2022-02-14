@@ -46,9 +46,12 @@ public class VendingMachineUI {
         out.println();
         DecimalFormat formatter = new DecimalFormat("0");
         for (int i = 0; i < options.length; i++) {
-            int optionNum = i + 1;
-            String optFormatted = formatter.format(optionNum);
-            out.println(optFormatted + ") " + options[i]);
+
+            if (!(options[i] instanceof String)  || !((String)options[i]).isEmpty()) {
+                int optionNum = i + 1;
+                String optFormatted = formatter.format(optionNum);
+                out.println(optFormatted + ") " + options[i]);
+            }
         }
         out.print(System.lineSeparator() + "Please choose an option >>> ");
         out.flush();
