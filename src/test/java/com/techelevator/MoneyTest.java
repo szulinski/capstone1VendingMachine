@@ -15,14 +15,15 @@ public class MoneyTest {
         Money money = new Money();
 
         // Change expected funds to zero
-        BigDecimal expectedFunds = new BigDecimal (0.00);
-        //expectedFunds = expectedFunds.scale(2);
+        BigDecimal expectedFunds = new BigDecimal ("6.90");
+        money.addFunds (expectedFunds);
+        expectedFunds = expectedFunds.setScale(2);
 
         // Act
         BigDecimal availableFunds = money.getAvailableFunds();
 
         // Assert
-        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), availableFunds);
+        Assert.assertEquals(expectedFunds, availableFunds);
     }
 
     @Test
@@ -126,20 +127,44 @@ public class MoneyTest {
     }
 
     @Test
-    public void cash_out_normal_data_test()
-    {
-        // Arrange
+    public void cash_out_test_zero() {
+
+        //Arrange
         Money money = new Money();
-        BigDecimal expectedFunds = new BigDecimal(0.00);
-        //expectedFunds = expectedFunds.scale(2);
+
+        BigDecimal[] expectedChange = new BigDecimal[3];
+        expectedChange[0] = new BigDecimal("0");
+        expectedChange[1] = new BigDecimal("0");
+        expectedChange[2] = new BigDecimal("0");
 
         // Act
-        money.cashOut();
-        BigDecimal availableFunds = money.getAvailableFunds();
+        BigDecimal[] change = money.cashOut();
 
         // Assert
-        Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), availableFunds);
-
+        Assert.assertEquals(expectedChange[0], change[0]);
+        Assert.assertEquals(expectedChange[1], change[1]);
+        Assert.assertEquals(expectedChange[2], change[2]);
     }
+    @Test
+    public void cash_out_test_normal_data() {
 
+        //Arrange
+        Money money = new Money();
+        BigDecimal addedFunds = new BigDecimal("6.90");
+        money.addFunds(addedFunds);
+
+        BigDecimal[] expectedChange = new BigDecimal[3];
+        expectedChange[0] = new BigDecimal("27");
+        //expectedChange[0] = change[0].setScale(0);
+        expectedChange[1] = new BigDecimal("1");
+        //expectedChange[1] = change[0].setScale(0);
+        expectedChange[2] = new BigDecimal("1");
+        //expectedChange[2] = change[0].setScale(0);
+
+        // Act
+        BigDecimal[] change = money.cashOut();
+
+        // Assert
+        Assert.assertEquals(expectedChange[0], change[0]);
+    }
 }
