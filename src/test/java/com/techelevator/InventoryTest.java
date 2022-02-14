@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import static org.junit.Assert.assertTrue;
+import com.techelevator.Inventory;
 
 public class InventoryTest {
 

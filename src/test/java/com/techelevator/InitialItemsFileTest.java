@@ -25,27 +25,14 @@ public class InitialItemsFileTest {
 
     }
 
+
+
+
     @Test
-    public void Initial_Items_File_No_Data()
+    public void initial_Items_File_No_File_Name()
     {
         // Arrange
         String InitialItemsString  = "";
-        int expectedListLength = 0;
-
-        // Act
-        Inventory inventoryTest = new Inventory(InitialItemsString);
-        int listLength = inventoryTest.getInventoryListLength();
-//
-        // Test
-        Assert.assertEquals(expectedListLength, listLength);
-    }
-
-
-    @Test
-    public void initial_Items_File_Null_File_Name()
-    {
-        // Arrange
-        String InitialItemsString  = null;
         int expectedListLength = 4;
 
         // Act
@@ -58,8 +45,39 @@ public class InitialItemsFileTest {
 
     }
 
+  /* @Test
+    public void Initial_Items_Constructor ()
+    {
+        // Arrange
+        String initialItemsString  = "VendingMachineTest.csv";
+        int expectedListLength = 4;
 
+        // Act
+        Inventory inventoryTest = new Inventory(initialItemsString);
+        int listLength = inventoryTest.getInventoryListLength();
+        String expectedString = "class com.techelevator.Inventory";
+        String actualString = inventoryTest.getClass().toString();
 
+        // Test
+        Assert.assertEquals(expectedListLength, listLength);
+        Assert.assertEquals(expectedString, actualString);
+
+    }*/
+
+ /* @Test
+    public void Initial_Items_File_No_Data()
+    {
+        // Arrange
+        String InitialItemsString  = "";
+        int expectedListLength = 0;
+
+        // Act
+        Inventory inventoryTest = new Inventory(InitialItemsString);
+        int listLength = inventoryTest.getInventoryListLength();
+
+        // Test
+        Assert.assertEquals(expectedListLength, listLength);
+    }*/
 
     /*public void INITIALIZATION_TEST_NULL_FILE() {
         File inputFile;

@@ -8,7 +8,7 @@ public class InitialItemsFile {
 
     private File inputFile;
     private Scanner inputScanner;
-    private Inventory inventory;
+    private com.Inventory inventory;
 
 
     public InitialItemsFile (File inputFile, Inventory inventory)

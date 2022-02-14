@@ -144,16 +144,14 @@ public class VendingMachine {
             money.addFunds(funds);
 
             BigDecimal endingBalance = money.getAvailableFunds();
-            String endingBalanceString = "$" + endingBalance.toString() + " ";
+            String endingBalanceString = "$" + endingBalance.toString() ;
 
-            String message = "FEED MONEY:  " + startingBalanceString + endingBalanceString;
-
+            String message = "FEED MONEY: " + startingBalanceString + endingBalanceString;
 
             audit.createAuditEntry(message);
 
-
         } catch (ArithmeticException e) {
-            e.printStackTrace();
+            System.out.println ("An Arithmetic Exception occured in addFunds.");
         }
     }
     public boolean createInventorySales()

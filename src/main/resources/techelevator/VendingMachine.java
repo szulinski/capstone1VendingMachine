@@ -1,13 +1,12 @@
 package com.techelevator;
 
-import java.io.File;
 import java.math.BigDecimal;
 
 
 public class VendingMachine {
 
     private String inputFileString;
-    private Inventory inventory;
+    private com.Inventory inventory;
     private Money money;
     private Audit audit;
     private SalesReport salesReport;
@@ -164,11 +163,10 @@ public class VendingMachine {
             e.printStackTrace();
         }
     }
-    public boolean createInventorySales()
+    public void createInventorySales()
     {
         String writeString = inventory.createInventorySales();
         salesReport = new SalesReport(inputFileString, writeString);
-        return true;
     }
 
     public String closeApplication()

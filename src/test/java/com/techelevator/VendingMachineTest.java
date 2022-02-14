@@ -14,7 +14,6 @@ public class VendingMachineTest {
     public void constructor_Test(){
 
         //Arrange
-        // delete AuditLogTest.txt
         String inventoryString = "VendingMachineTest.csv";
         String auditLog = "AuditLogTest.txt";
         String salesReport = "SalesReport.csv";

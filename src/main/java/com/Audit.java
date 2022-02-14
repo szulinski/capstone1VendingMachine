@@ -39,7 +39,7 @@ public class Audit {
         }
         catch (NullPointerException e)
         {
-            System.out.println("Null pointer exception for the Audit Writer ");
+            System.out.println("Null pointer exception for the Audit Writer.");
         }
 
     }

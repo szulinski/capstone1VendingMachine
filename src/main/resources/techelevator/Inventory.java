@@ -1,12 +1,8 @@
 package com.techelevator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.nio.channels.ScatteringByteChannel;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class Inventory {

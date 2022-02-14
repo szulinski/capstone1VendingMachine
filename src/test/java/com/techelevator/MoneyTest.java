@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import com.techelevator.*;
+import com.techelevator.Money;
 
 public class MoneyTest {
 
