@@ -11,23 +11,23 @@ public class Audit {
 
     private File outputFile;
     private PrintWriter auditWriter;
-    private String FileName;
+    private String fileName;
     public final String FORMAT = "MM/dd/yyyy HH:mm:ss a";
 
-    public Audit ()
+    public Audit (String fileName)
     {
-        FileName = "log.txt";
+        this.fileName  = fileName;
         createPrintWriter();
     }
 
     private void createPrintWriter()
     {
-        if (FileName == null)
+        if (fileName == null)
         {
             System.out.println("The file name of the print writer is null.");
             return;
         }
-        File outputFile = new File(FileName);
+        File outputFile = new File(fileName);
         boolean isAppend = true;
         try
         {
