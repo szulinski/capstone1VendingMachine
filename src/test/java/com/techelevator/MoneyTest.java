@@ -15,7 +15,7 @@ public class MoneyTest {
         Money money = new Money();
 
         // Change expected funds to zero
-        BigDecimal expectedFunds = new BigDecimal (10.00);
+        BigDecimal expectedFunds = new BigDecimal (0.00);
         //expectedFunds = expectedFunds.scale(2);
 
         // Act
@@ -31,7 +31,7 @@ public class MoneyTest {
         // Arrange
         Money money = new Money();
         // Change expected funds to added funds
-        BigDecimal expectedFunds = new BigDecimal (15.00);
+        BigDecimal expectedFunds = new BigDecimal (5.00);
         //expectedFunds = expectedFunds.scale(2);
 
         BigDecimal availableFunds = money.getAvailableFunds();
@@ -55,7 +55,7 @@ public class MoneyTest {
         Money money = new Money();
 
         // Change expected funds to zero
-        BigDecimal expectedFunds = new BigDecimal (10.00);
+        BigDecimal expectedFunds = new BigDecimal (0.00);
         //expectedFunds = expectedFunds.scale(2);
 
         BigDecimal availableFunds = money.getAvailableFunds();
@@ -77,10 +77,9 @@ public class MoneyTest {
     {
         // Arrange
         Money money = new Money();
-
-        // Change expected funds to zero
-
-        // should originally be set to 0
+        BigDecimal tenDollars = new BigDecimal("10.00");
+        tenDollars = tenDollars.setScale(2);
+        money.addFunds (tenDollars);
 
         BigDecimal expectedFunds = new BigDecimal (6.95);
         // will need to add funds
@@ -90,7 +89,7 @@ public class MoneyTest {
         BigDecimal price = new BigDecimal(3.05).setScale(2, RoundingMode.HALF_DOWN);
 
         // Act
-        money.addFunds(additionalFunds);
+        //money.addFunds(additionalFunds);
         money.purchaseItem(price);
 
         BigDecimal actualFunds = money.getAvailableFunds();
