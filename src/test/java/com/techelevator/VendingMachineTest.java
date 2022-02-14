@@ -19,7 +19,7 @@ public class VendingMachineTest {
         String salesReport = "SalesReport.csv";
 
         // Act
-        com.techelevator.VendingMachine vendingMachine = new VendingMachine(inventoryString, auditLog, salesReport);
+        VendingMachine vendingMachine = new VendingMachine(inventoryString, auditLog, salesReport);
 
         File newAuditTest = new File (auditLog);
 
