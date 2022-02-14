@@ -9,12 +9,18 @@ public class Money {
 
     public Money()
     {
-        availableFunds = new BigDecimal("0.00");
+        try {
+            availableFunds = new BigDecimal("0.00");
+        }
+        catch (ArithmeticException e)
+        {
+            System.out.println ("Arithmetic problem with Big Decimals.");
+        }
     }
 
     public void addFunds(BigDecimal newFunds)
     {
-            BigDecimal zero = new BigDecimal(0.0);
+            BigDecimal zero = new BigDecimal("0.0");
 
             int fundsToZero = newFunds.compareTo(zero);
 
@@ -23,6 +29,7 @@ public class Money {
             }
 
     }
+
     public boolean purchaseItem(BigDecimal price) {
         boolean isSufficientFunds = false;
 
@@ -73,7 +80,9 @@ public class Money {
             change[2] = nickelsRounded;
             return change;
         } catch (ArithmeticException e) {
-            return change;
+            System.out.println("Arithmetic problem in Money.");
         }
+        return change;
+
     }
 }
