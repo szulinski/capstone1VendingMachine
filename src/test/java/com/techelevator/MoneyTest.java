@@ -72,7 +72,7 @@ public class MoneyTest {
         Assert.assertEquals(expectedFunds.setScale(2, RoundingMode.DOWN), actualFunds);
 
     }
-
+//
     @Test
     public void purchase_item_normal_data_test()
     {
