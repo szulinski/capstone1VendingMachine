@@ -7,13 +7,14 @@ import java.io.PrintWriter;
 
 public class SalesReport {
 
-    private String fileName = "salesreport.csv";
+    private String fileName;
     private String writeString;
     private PrintWriter reportWriter;
 
 
-    public SalesReport(String writeString)
+    public SalesReport(String fileName, String writeString)
     {
+        this.fileName = fileName;
         this.writeString = writeString;
         generateSalesReport();
     }
