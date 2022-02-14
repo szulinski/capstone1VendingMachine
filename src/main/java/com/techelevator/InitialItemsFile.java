@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InitialItemsFile {
 
     private File inputFile;
-    //private Scanner inputScanner;
+    private Scanner inputScanner;
     private Inventory inventory;
 
 
@@ -16,6 +16,7 @@ public class InitialItemsFile {
         this.inputFile = inputFile;
         this.inventory = inventory;
         createScanner();
+        loadItemsToInventory();
     }
 
     private void createScanner()
@@ -27,18 +28,19 @@ public class InitialItemsFile {
             System.exit (-1);
         }
 
-        try (Scanner inputScanner = new Scanner(inputFile))
+        try
         {
-            loadItemsToInventory(inputScanner);
+            inputScanner = new Scanner(inputFile);
+            loadItemsToInventory();
         }
         catch (IOException e){
-            System.out.println("Exception: " + e.getMessage());
+            //System.out.println("Exception: " + e.getMessage());
             System.out.println("Exception creating scanner to read initialization file");
             System.exit(-1);
         }
     }
 
-    private void loadItemsToInventory(Scanner inputScanner)
+    private void loadItemsToInventory()
     {
         while (inputScanner.hasNextLine())
         {
@@ -46,8 +48,7 @@ public class InitialItemsFile {
                 String[] itemArray =  lineFromFile.split("\\|");
                 Item newItem = new Item(itemArray);
                 inventory.addToInventory(newItem);
-
-            }
+        }
     }
 }
 
