@@ -28,7 +28,7 @@ public class InitialItemsFileTest {
 
 
 
-    @Test
+    /*@Test
     public void initial_Items_File_No_File_Name()
     {
         // Arrange
@@ -43,7 +43,7 @@ public class InitialItemsFileTest {
         // Test
         Assert.assertEquals(expectedListLength, listLength);
 
-    }
+    }*/
 
   /* @Test
     public void Initial_Items_Constructor ()
