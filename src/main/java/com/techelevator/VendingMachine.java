@@ -6,27 +6,28 @@ import java.math.BigDecimal;
 
 public class VendingMachine {
 
-    private String inputFileString = "vendingmachine.csv";
+    private String inputFileString;
     private Inventory inventory;
     private Money money;
     private Audit audit;
     private SalesReport salesReport;
-
-
-
+    private String salesReportString;
+    private String auditFileString;
 
 
 
     //public VendingMachine(File inputFile)
-    public VendingMachine()
+    public VendingMachine(String inputFileString, String auditFileString, String salesReportString)
     {
-        //this.inputFileString = ;
+        this.inputFileString = inputFileString;
+        this.salesReportString = salesReportString;
+        this.auditFileString = auditFileString;
         loadInventory();
         money = new Money();
-        audit = new Audit();
-        BigDecimal addFunds = new BigDecimal("0.00");
-        addFunds = addFunds.setScale(2);
-        addFunds(addFunds);
+        audit = new Audit(auditFileString);
+        //BigDecimal addFunds = new BigDecimal("0.00");
+        ///addFunds = addFunds.setScale(2);
+        ///addFunds(addFunds);
         inventory.createInventoryArray();
 
         //audit.createAuditEntry("Purchase Made");
@@ -57,9 +58,16 @@ public class VendingMachine {
 
     private void loadInventory()
     {
+        if (inputFileString == null)
+        {
+            System.out.println ("The inventory file name is null.");
+            return;
+        }
 
-        File inputFile = new File(inputFileString);
-        inventory = new Inventory(inputFile);
+        //File inputFile = new File(inputFileString);
+
+
+        inventory = new Inventory(inputFileString);
 
         System.out.println("Inventory successfully loaded.");
     }
@@ -159,7 +167,7 @@ public class VendingMachine {
     public boolean createInventorySales()
     {
         String writeString = inventory.createInventorySales();
-        salesReport = new SalesReport(writeString);
+        salesReport = new SalesReport(inputFileString, writeString);
         return true;
     }
 
@@ -187,4 +195,5 @@ public class VendingMachine {
         String moneyString = "The available balance is $" + availableFundsString + ".";
         return moneyString;
     }
+
 }
