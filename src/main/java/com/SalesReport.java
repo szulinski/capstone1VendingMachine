@@ -16,6 +16,7 @@ public class SalesReport {
     {
         this.writeString = writeString;
         generateSalesReport();
+        System.out.println("Sales report created.");
     }
 
     private void generateSalesReport()
